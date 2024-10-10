@@ -1,0 +1,12 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-var": "error",
+    "no-console": "warn",
+    "require-await": "error",
+    "eqeqeq": "warn",
+    "no-multiple-empty-lines": "warn",
+    "no-unused-vars": "warn"
+  }
+}
