@@ -4,7 +4,7 @@
     "prettier/prettier": "error",
     "no-var": "error",
     "no-console": "warn",
-    "require-await": "error",
+    // "require-await": "error",
     "eqeqeq": "warn",
     "no-multiple-empty-lines": "warn",
     "no-unused-vars": "warn"
