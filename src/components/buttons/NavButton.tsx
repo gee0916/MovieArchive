@@ -6,28 +6,38 @@ import media from "@/styles/media";
 interface NavButtonProps {
   iconClass?: string;
   label: string;
-  isActive: boolean;
-  href: string;
+  isActive?: boolean;
+  href?: string;
+  isLink: boolean;
 }
 
-export default function NavButton({ iconClass, label, isActive, href }: NavButtonProps) {
+export default function NavButton({
+  iconClass,
+  label,
+  isActive = false,
+  href,
+  isLink,
+}: NavButtonProps) {
+  const content = (
+    <NavWrap $isActive={isActive}>
+      {iconClass ? (
+        <i className={`bi ${iconClass}`}></i>
+      ) : (
+        <ProfileImage src="/images/기본이미지.png" alt="프로필이미지" width={24} height={24} />
+      )}
+      <NavName>{label}</NavName>
+    </NavWrap>
+  );
+
   return (
     <NavFlexWrap>
-      <Link href={href} passHref>
-        <NavWrap $isActive={isActive}>
-          {iconClass ? (
-            <i className={`bi ${iconClass}`}></i>
-          ) : (
-            <PofileImage
-              src="/images/기본이미지.png"
-              alt="프로필이미지"
-              width={24}
-              height={24}
-            ></PofileImage>
-          )}
-          <NavName>{label}</NavName>
-        </NavWrap>
-      </Link>
+      {isLink && href ? (
+        <Link href={href} passHref>
+          {content}
+        </Link>
+      ) : (
+        <NavButtonWrap>{content}</NavButtonWrap>
+      )}
     </NavFlexWrap>
   );
 }
@@ -51,10 +61,18 @@ const NavWrap = styled.div<{ $isActive: boolean }>`
   flex: 1;
   i {
     font-size: ${({ theme }) => theme.fontSize.max};
+    height: 2.5rem;
   }
 `;
 
-const PofileImage = styled(Image)`
+const NavButtonWrap = styled.button`
+  width: 100%;
+  & div:hover {
+    color: ${({ theme }) => theme.colors.darkBlack};
+  }
+`;
+
+const ProfileImage = styled(Image)`
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.colors.silverGray};
 `;
@@ -63,6 +81,7 @@ const NavName = styled.span`
   margin-top: 0.4rem;
   font-size: 1.1rem;
   font-family: ${({ theme }) => theme.fonts.second};
+  line-height: 1.1rem;
   ${media().large`
       margin-top: 0.2rem;
   `}

@@ -45,30 +45,22 @@ export default function Header({ currentPath, activePage, onNavigate }: HeaderPr
                       label="나의 무비"
                       isActive={currentPath === "/profile"}
                       href="/profile"
+                      isLink={true}
                     />
                     <NavButton
                       label="포토카드 제작"
                       iconClass="bi-postcard"
                       isActive={currentPath === "/create-photo-card"}
                       href="/create-photo-card"
+                      isLink={true}
                     />
                   </HS.HeaderBtnWrap>
                 </>
               ) : (
                 <>
                   <HS.HeaderBtnWrap $btnGap="3rem">
-                    <NavButton
-                      label="로그인"
-                      href="/login"
-                      iconClass="bi-person"
-                      isActive={currentPath === "/login"}
-                    />
-                    <NavButton
-                      label="회원가입"
-                      href="/signup"
-                      iconClass="bi-person-fill-add"
-                      isActive={currentPath === "/signup"}
-                    />
+                    <NavButton label="로그인" iconClass="bi-person" isLink={false} />
+                    <NavButton label="회원가입" iconClass="bi-person-fill-add" isLink={false} />
                   </HS.HeaderBtnWrap>
                 </>
               )}

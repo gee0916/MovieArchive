@@ -14,12 +14,19 @@ export default function NavBar({ currentPath }: HeaderProps) {
   return (
     <NavBarContainer>
       <NavBarInner className="navbar-inner">
-        <NavButton label="홈" iconClass="bi-house-fill" isActive={currentPath === "/"} href="/" />
+        <NavButton
+          label="홈"
+          iconClass="bi-house-fill"
+          isActive={currentPath === "/"}
+          href="/"
+          isLink={true}
+        />
         <NavButton
           label="검색"
           iconClass="bi-search"
           isActive={currentPath === "/search"}
           href="/search"
+          isLink={true}
         />
         {isLoggedIn ? (
           <>
@@ -28,16 +35,17 @@ export default function NavBar({ currentPath }: HeaderProps) {
               iconClass="bi-postcard"
               isActive={currentPath === "/create-photo-card"}
               href="/create-photo-card"
+              isLink={true}
             />
-            <NavButton label="나의 무비" isActive={currentPath === "/profile"} href="/profile" />
+            <NavButton
+              label="나의 무비"
+              isActive={currentPath === "/profile"}
+              href="/profile"
+              isLink={true}
+            />
           </>
         ) : (
-          <NavButton
-            label="로그인"
-            href="/login"
-            iconClass="bi-person"
-            isActive={currentPath === "/login"}
-          />
+          <NavButton label="로그인" iconClass="bi-person" isLink={false} />
         )}
       </NavBarInner>
     </NavBarContainer>

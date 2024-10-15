@@ -18,11 +18,6 @@ export const HeaderContainer = styled.header`
   position: fixed;
   z-index: 999;
   top: 0px;
-  /* &.active {
-    position: fixed;
-    box-shadow: 0 0 5px rgba(${({ theme }) => theme.colors.darkBlack}, 0.2);
-    border: none;
-  } */
 `;
 
 export const HeaderWrap = styled.div`
