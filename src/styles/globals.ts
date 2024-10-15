@@ -42,14 +42,19 @@ const GlobalStyles = createGlobalStyle`
       list-style: none;
   }
   button {
-      border: 0;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    &:focus-visible {
+      outline: none;
+    }
   }
   input {
     border: none;
   }
+
+  /* Common Style */
   .a11y-hidden {
   position: absolute;
   width: 0.1rem;
@@ -62,6 +67,17 @@ const GlobalStyles = createGlobalStyle`
     width: 116rem;
     margin: auto;
     padding: 1.5rem 0;
+    ${[media().extraSmall, media().small, media().medium].map(
+      (mediaQuery) => `
+    ${mediaQuery`
+      {
+        width: 100%;
+        padding-left: 3.5%;
+        padding-right: 3.5%;
+      }
+    `}
+  `,
+    )}
   }
   .logo {
     display: none;
@@ -72,17 +88,15 @@ const GlobalStyles = createGlobalStyle`
       position: relative;
   `}
   }
-  ${[media().extraSmall, media().small, media().medium].map(
-    (mediaQuery) => `
-    ${mediaQuery`
-      [class*="inner"] {
-        width: 100%;
-        padding-left: 3.5%;
-        padding-right: 3.5%;
-      }
-    `}
-  `,
-  )}
+  .modal-overlay {
+    position: fixed;
+    background-color: rgba(51, 51, 51, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
 `;
 
 export default GlobalStyles;

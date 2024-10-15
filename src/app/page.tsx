@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Header from "@/components/layout/header/Header";
+import Header from "@/pages/layout/header/Header";
 import Home from "@/pages/home/Home";
 import PhotoCard from "./../pages/home/PhotoCard";
 import useMediaHook from "@/hook/MeadiaHook";
-import Footer from "../components/layout/footer/Footer";
+import Footer from "@/pages/layout/footer/Footer";
 import styled from "styled-components";
 import media from "@/styles/media";
 
