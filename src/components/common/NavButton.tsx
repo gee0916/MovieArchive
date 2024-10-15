@@ -9,6 +9,7 @@ interface NavButtonProps {
   isActive?: boolean;
   href?: string;
   isLink: boolean;
+  onClick?: () => void;
 }
 
 export default function NavButton({
@@ -17,6 +18,7 @@ export default function NavButton({
   isActive = false,
   href,
   isLink,
+  onClick,
 }: NavButtonProps) {
   const content = (
     <NavWrap $isActive={isActive}>
@@ -36,7 +38,7 @@ export default function NavButton({
           {content}
         </Link>
       ) : (
-        <NavButtonWrap>{content}</NavButtonWrap>
+        <NavButtonWrap onClick={onClick}>{content}</NavButtonWrap>
       )}
     </NavFlexWrap>
   );

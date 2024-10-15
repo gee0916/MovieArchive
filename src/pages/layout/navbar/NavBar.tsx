@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import media from "@/styles/media";
-import NavButton from "@/components/buttons/NavButton";
+import NavButton from "@/components/common/NavButton";
 import { authAtom } from "@/state/authAtom";
 import { useAtom } from "jotai";
 
