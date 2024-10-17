@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface InputProps {
   label?: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
 }
 
 export default function Input({ label, type, placeholder }: InputProps) {
@@ -15,22 +15,21 @@ export default function Input({ label, type, placeholder }: InputProps) {
 
   return (
     <>
-      <InputWrap>
+      <InputInner>
         {label && <StyledLabel>{label}</StyledLabel>}
         <StyledInput type={inputType} hasLabel={!!label} placeholder={placeholder}></StyledInput>
-        {placeholder.includes("비밀번호") && (
+        {placeholder && placeholder.includes("비밀번호") && (
           <i
             className={`bi ${inputType === "password" ? "bi-eye" : "bi-eye-slash"}`}
             onClick={togglePassword}
           ></i>
         )}
-      </InputWrap>
+      </InputInner>
     </>
   );
 }
-const InputWrap = styled.div`
+const InputInner = styled.div`
   position: relative;
-  margin: 1.5rem 0;
   .bi {
     position: absolute;
     right: 15px;
@@ -59,7 +58,6 @@ const StyledInput = styled.input<{ hasLabel: boolean }>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.dimGray};
   border-radius: ${({ hasLabel }) => (hasLabel ? "0" : "0.5rem")};
   font-size: ${({ theme }) => theme.fontSize.semiBold};
-  margin: 0 auto 34px auto;
   outline: none;
   background: transparent;
   color: ${({ theme }) => theme.colors.darkBlack};

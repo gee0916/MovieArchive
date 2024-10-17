@@ -56,6 +56,16 @@ export const HeaderWrapInner = styled.div`
   `}
 `;
 
+export const HeaderLogo = styled.div`
+  display: none;
+  ${media().large`
+      display: block;
+      width: 24.8rem;
+      height: 2.7rem;
+      position: relative;
+  `}
+`;
+
 export const HeaderNaviWrap = styled.div`
   display: flex;
   gap: 4.3rem;
