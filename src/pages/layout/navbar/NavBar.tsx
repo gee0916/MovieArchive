@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import media from "@/styles/media";
-import NavButton from "@/components/common/NavButton";
+import NavButton from "@/components/common/NavBtn";
 import { authAtom } from "@/state/authAtom";
 import { useAtom } from "jotai";
+import useModalHook from "@/hook/UseModalHook";
+import LoginJoinModal from "@/pages/modal/LoginJoinModal";
 
 interface HeaderProps {
   currentPath: string;
@@ -10,45 +12,54 @@ interface HeaderProps {
 
 export default function NavBar({ currentPath }: HeaderProps) {
   const [isLoggedIn] = useAtom(authAtom);
+  const { isModal, clickModal } = useModalHook();
 
   return (
-    <NavBarContainer>
-      <NavBarInner className="navbar-inner">
-        <NavButton
-          label="홈"
-          iconClass="bi-house-fill"
-          isActive={currentPath === "/"}
-          href="/"
-          isLink={true}
-        />
-        <NavButton
-          label="검색"
-          iconClass="bi-search"
-          isActive={currentPath === "/search"}
-          href="/search"
-          isLink={true}
-        />
-        {isLoggedIn ? (
-          <>
+    <>
+      <NavBarContainer>
+        <NavBarInner className="navbar-inner">
+          <NavButton
+            label="홈"
+            iconClass="bi-house-fill"
+            isActive={currentPath === "/"}
+            href="/"
+            isLink={true}
+          />
+          <NavButton
+            label="검색"
+            iconClass="bi-search"
+            isActive={currentPath === "/search"}
+            href="/search"
+            isLink={true}
+          />
+          {isLoggedIn ? (
+            <>
+              <NavButton
+                label="포토카드 제작"
+                iconClass="bi-postcard"
+                isActive={currentPath === "/create-photo-card"}
+                href="/create-photo-card"
+                isLink={true}
+              />
+              <NavButton
+                label="나의 무비"
+                isActive={currentPath === "/profile"}
+                href="/profile"
+                isLink={true}
+              />
+            </>
+          ) : (
             <NavButton
-              label="포토카드 제작"
-              iconClass="bi-postcard"
-              isActive={currentPath === "/create-photo-card"}
-              href="/create-photo-card"
-              isLink={true}
+              label="로그인"
+              iconClass="bi-person"
+              isLink={false}
+              onClick={() => clickModal("로그인")}
             />
-            <NavButton
-              label="나의 무비"
-              isActive={currentPath === "/profile"}
-              href="/profile"
-              isLink={true}
-            />
-          </>
-        ) : (
-          <NavButton label="로그인" iconClass="bi-person" isLink={false} />
-        )}
-      </NavBarInner>
-    </NavBarContainer>
+          )}
+        </NavBarInner>
+      </NavBarContainer>
+      {isModal.isVisible && <LoginJoinModal />}
+    </>
   );
 }
 

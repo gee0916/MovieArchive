@@ -2,13 +2,12 @@ import * as HS from "./HeaderStyles";
 import Link from "next/link";
 import { useAtom } from "jotai";
 import { authAtom } from "@/state/authAtom";
-import NavButton from "@/components/common/NavButton";
+import NavButton from "@/components/common/NavBtn";
 import Image from "next/image";
 import logo from "@/images/logo.svg";
 import SearchInp from "@/components/search/SearchInp";
 import useModalHook from "@/hook/UseModalHook";
-import LoginModal from "@/pages/modal/LoginModal";
-import JoinModal from "@/pages/modal/JoinModal";
+import LoginJoinModal from "@/pages/modal/LoginJoinModal";
 
 interface HeaderProps {
   currentPath: string;
@@ -27,9 +26,9 @@ export default function Header({ currentPath, activePage, onNavigate }: HeaderPr
           <HS.HeaderWrap>
             <HS.HeaderWrapInner>
               <Link href="/">
-                <div className="logo">
+                <HS.HeaderLogo>
                   <Image src={logo} alt="무비아카이브로고" style={{ objectFit: "contain" }} />
-                </div>
+                </HS.HeaderLogo>
               </Link>
               <HS.HeaderNaviWrap>
                 <Link href="/" onClick={() => onNavigate("home")}>
@@ -84,12 +83,7 @@ export default function Header({ currentPath, activePage, onNavigate }: HeaderPr
           </HS.HeaderWrap>
         </div>
       </HS.HeaderContainer>
-      {isModal.isVisible &&
-        (isModal.type === "로그인" ? (
-          <LoginModal />
-        ) : isModal.type === "회원가입" ? (
-          <JoinModal />
-        ) : null)}
+      {isModal.isVisible && <LoginJoinModal />}
     </>
   );
 }

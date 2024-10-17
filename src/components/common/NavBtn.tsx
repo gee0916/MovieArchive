@@ -38,7 +38,9 @@ export default function NavButton({
           {content}
         </Link>
       ) : (
-        <NavButtonWrap onClick={onClick}>{content}</NavButtonWrap>
+        <NavButtonWrap onClick={onClick} type="button">
+          {content}
+        </NavButtonWrap>
       )}
     </NavFlexWrap>
   );

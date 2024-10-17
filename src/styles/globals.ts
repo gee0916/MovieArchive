@@ -79,15 +79,6 @@ const GlobalStyles = createGlobalStyle`
   `,
     )}
   }
-  .logo {
-    display: none;
-    ${media().large`
-      display: block;
-      width: 24.8rem;
-      height: 2.7rem;
-      position: relative;
-  `}
-  }
   .modal-overlay {
     position: fixed;
     background-color: rgba(51, 51, 51, 0.5);
@@ -96,6 +87,9 @@ const GlobalStyles = createGlobalStyle`
     width: 100%;
     height: 100%;
     z-index: 1000;
+    ${media().extraSmall`
+      background-color: white;
+  `}
   }
 `;
 
