@@ -1,19 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Header from "@/pages/layout/header/Header";
-import Home from "@/pages/home/Home";
-import PhotoCard from "./../pages/home/PhotoCard";
+import Header from "@/components/layout/header/Header";
+import Home from "@/app/home/Home";
+import PhotoCard from "./home/PhotoCard";
 import useMediaHook from "@/hook/MeadiaHook";
-import Footer from "@/pages/layout/footer/Footer";
+import Footer from "@/components/layout/footer/Footer";
 import styled from "styled-components";
 import media from "@/styles/media";
-
-interface PageProps {
-  currentPath: string;
-  activePage: string;
-  onNavigate: (page: string) => void;
-}
+import { PageProps } from "@/types/type";
 
 export default function Page({ currentPath, activePage, onNavigate }: PageProps) {
   const [content, setContent] = useState<JSX.Element | null>(null);

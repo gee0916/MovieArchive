@@ -7,30 +7,35 @@ import Account from "./Account";
 import Image from "next/image";
 import logo from "@/images/logo.svg";
 import media from "@/styles/media";
+import Alert from "../alert/alert";
+import useAlertHook from "@/hook/UseAlertHook";
 
 export default function LoginModal() {
   const { isModal, clickModal } = useModalHook();
   const [step, setStep] = useState(isModal.type === "회원가입" ? 2 : 1);
-
+  const { isAlert } = useAlertHook();
   const handleOverlayClick = () => {
     clickModal();
   };
 
   return (
-    <div onClick={handleOverlayClick} className="modal-overlay">
-      <LoginWrap onClick={(e) => e.stopPropagation()}>
-        <ModalLogo>
-          <Image src={logo} alt="무비아카이브로고" style={{ objectFit: "contain" }} />
-        </ModalLogo>
-        {step === 1 && <Login onNext={() => setStep(2)} />}
-        {step === 2 && <Join onNext={() => setStep(3)} onBack={() => setStep(1)} />}
-        {step === 3 && <Account onNext={() => setStep(1)} />}
-      </LoginWrap>
-    </div>
+    <>
+      <div onClick={handleOverlayClick} className="modal-overlay">
+        <ModalWrap onClick={(e) => e.stopPropagation()}>
+          <ModalLogo>
+            <Image src={logo} alt="무비아카이브로고" style={{ objectFit: "contain" }} />
+          </ModalLogo>
+          {step === 1 && <Login onNext={() => setStep(2)} />}
+          {step === 2 && <Join onNext={() => setStep(3)} onBack={() => setStep(1)} />}
+          {step === 3 && <Account onNext={() => setStep(1)} />}
+        </ModalWrap>
+      </div>
+      {isAlert.isVisible && <Alert message={isAlert.message} />}
+    </>
   );
 }
 
-const LoginWrap = styled.div`
+const ModalWrap = styled.div`
   min-width: 36rem;
   height: 68.6rem;
   background-color: ${({ theme }) => theme.colors.white};

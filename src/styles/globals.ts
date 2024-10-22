@@ -81,7 +81,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .modal-overlay {
     position: fixed;
-    background-color: rgba(51, 51, 51, 0.5);
+    background-color: rgba(51, 51, 51, 0.3);
     top: 0;
     left: 0;
     width: 100%;

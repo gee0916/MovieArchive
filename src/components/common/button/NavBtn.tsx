@@ -2,15 +2,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import media from "@/styles/media";
-
-interface NavButtonProps {
-  iconClass?: string;
-  label: string;
-  isActive?: boolean;
-  href?: string;
-  isLink: boolean;
-  onClick?: () => void;
-}
+import BasicImg from "@/images/basic-profile-img.png";
+import { NavButtonProps } from "@/types/type";
 
 export default function NavButton({
   iconClass,
@@ -25,7 +18,7 @@ export default function NavButton({
       {iconClass ? (
         <i className={`bi ${iconClass}`}></i>
       ) : (
-        <ProfileImage src="/images/기본이미지.png" alt="프로필이미지" width={24} height={24} />
+        <ProfileImage src={BasicImg} alt="프로필이미지" width={24} height={24} />
       )}
       <NavName>{label}</NavName>
     </NavWrap>

@@ -3,7 +3,7 @@
   "rules": {
     "prettier/prettier": "error",
     "no-var": "error",
-    "no-console": "warn",
+    // "no-console": "warn",
     // "require-await": "error",
     "eqeqeq": "warn",
     "no-multiple-empty-lines": "warn",

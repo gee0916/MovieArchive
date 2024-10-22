@@ -1,12 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-
-interface ButtonProps {
-  href?: string;
-  type: string /* link button circle*/;
-  content?: string;
-  onClick?: () => void;
-}
+import { ButtonProps } from "@/types/type";
 
 export default function ComBtn({ href, type, content, onClick }: ButtonProps) {
   return (
