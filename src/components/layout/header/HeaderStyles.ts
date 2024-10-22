@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import media from "@/styles/media";
-
-interface HeaderNaviProps {
-  $isActive: boolean;
-}
-
-interface BtnGapProps {
-  $btnGap: string;
-}
+import { StyledProps } from "@/types/type";
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -82,7 +75,7 @@ export const HeaderNaviWrap = styled.div`
   )}
 `;
 
-export const HeaderNavi = styled.span<HeaderNaviProps>`
+export const HeaderNavi = styled.span<StyledProps>`
   font-family: ${({ theme }) => theme.fonts.third};
   font-size: ${({ theme }) => theme.fontSize.max};
   font-weight: 600;
@@ -90,7 +83,7 @@ export const HeaderNavi = styled.span<HeaderNaviProps>`
     $isActive ? theme.colors.darkBlack : theme.colors.lightBlack};
 `;
 
-export const HeaderBtnWrap = styled.div<BtnGapProps>`
+export const HeaderBtnWrap = styled.div<StyledProps>`
   display: flex;
   justify-content: space-evenly;
   height: 3.9rem;

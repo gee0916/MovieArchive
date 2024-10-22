@@ -4,14 +4,15 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../styles/globals";
 import theme from "../styles/theme";
 import "../fonts/fonts.css";
-import Header from "@/pages/layout/header/Header";
-import NavBar from "@/pages/layout/navbar/NavBar";
+import Header from "@/components/layout/header/Header";
+import NavBar from "@/components/layout/navbar/NavBar";
 import { Provider } from "jotai";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import Page from "./page";
 import useMediaHook from "@/hook/MeadiaHook";
 import useHeaderHook from "@/hook/HeaderHook";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,35 +25,38 @@ export default function Layout({ children }: LayoutProps) {
   const handleNavigation = (page: string) => {
     setActivePage(page);
   };
+  const queryClient = new QueryClient();
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Provider>
-        <html lang="en">
-          <body>
-            {isLargeScreen && (
-              <Header
-                currentPath={pathname}
-                onNavigate={handleNavigation}
-                activePage={activePage}
-              />
-            )}
-            <main>
-              {pathname === "/" ? (
-                <Page
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Provider>
+          <html lang="en">
+            <body>
+              {isLargeScreen && (
+                <Header
                   currentPath={pathname}
                   onNavigate={handleNavigation}
                   activePage={activePage}
                 />
-              ) : (
-                children
               )}
-            </main>
-            <NavBar currentPath={pathname} />
-          </body>
-        </html>
-      </Provider>
-    </ThemeProvider>
+              <main>
+                {pathname === "/" ? (
+                  <Page
+                    currentPath={pathname}
+                    onNavigate={handleNavigation}
+                    activePage={activePage}
+                  />
+                ) : (
+                  children
+                )}
+              </main>
+              <NavBar currentPath={pathname} />
+            </body>
+          </html>
+        </Provider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

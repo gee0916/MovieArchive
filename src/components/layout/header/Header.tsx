@@ -2,22 +2,31 @@ import * as HS from "./HeaderStyles";
 import Link from "next/link";
 import { useAtom } from "jotai";
 import { authAtom } from "@/state/authAtom";
-import NavButton from "@/components/common/NavBtn";
+import NavButton from "@/components/common/button/NavBtn";
 import Image from "next/image";
 import logo from "@/images/logo.svg";
 import SearchInp from "@/components/search/SearchInp";
 import useModalHook from "@/hook/UseModalHook";
-import LoginJoinModal from "@/pages/modal/LoginJoinModal";
+import LoginJoinModal from "@/components/common/modal/AuthModal";
+import { supabase } from "@/app/supabaseClient";
+import { useEffect } from "react";
+import { PageProps } from "@/types/type";
 
-interface HeaderProps {
-  currentPath: string;
-  activePage: string;
-  onNavigate: (page: string) => void;
-}
-
-export default function Header({ currentPath, activePage, onNavigate }: HeaderProps) {
-  const [isLoggedIn] = useAtom(authAtom);
+export default function Header({ currentPath, activePage, onNavigate }: PageProps) {
+  const [isLoggedIn, setAuth] = useAtom(authAtom);
   const { isModal, clickModal } = useModalHook();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session) {
+        setAuth(true);
+      }
+    };
+    checkSession();
+  }, [setAuth]);
 
   return (
     <>
@@ -31,10 +40,13 @@ export default function Header({ currentPath, activePage, onNavigate }: HeaderPr
                 </HS.HeaderLogo>
               </Link>
               <HS.HeaderNaviWrap>
-                <Link href="/" onClick={() => onNavigate("home")}>
+                <Link href="/" onClick={() => onNavigate && onNavigate("home")}>
                   <HS.HeaderNavi $isActive={activePage === "home"}>홈</HS.HeaderNavi>
                 </Link>
-                <Link href="/?page=photo-card" onClick={() => onNavigate("photo-card")}>
+                <Link
+                  href="/?page=photo-card"
+                  onClick={() => onNavigate && onNavigate("photo-card")}
+                >
                   <HS.HeaderNavi $isActive={activePage === "photo-card"}>포토카드</HS.HeaderNavi>
                 </Link>
               </HS.HeaderNaviWrap>

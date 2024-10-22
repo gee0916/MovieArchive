@@ -1,9 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-
-interface SnsBtnProps {
-  src: string;
-}
+import { SnsBtnProps } from "@/types/type";
 
 export default function SnsBtn({ src }: SnsBtnProps) {
   // eslint-disable-next-line @typescript-eslint/no-require-imports

@@ -1,23 +1,22 @@
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input/Input";
 import * as MS from "./ModalStyles";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import BasicImg from "@/images/basic-profile-img.png";
 import WelcomeImg from "@/images/welcome.svg";
-import ComBtn from "@/components/common/ComBtn";
+import ComBtn from "@/components/common/button/ComBtn";
+import { NextBackProps } from "@/types/type";
 
-interface JoinProps {
-  onNext: () => void;
-}
-
-export default function Account({ onNext }: JoinProps) {
+export default function Account({ onNext }: NextBackProps) {
   const [step, setStep] = useState(1);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const handleNextStep = () => {
     setStep((prev) => prev + 1);
   };
-  const NextJoin = () => {
-    onNext();
+  const NextLogin = () => {
+    if (onNext) {
+      onNext();
+    }
   };
   const ImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -75,7 +74,7 @@ export default function Account({ onNext }: JoinProps) {
               특별한 추억을 간직하세요 :&#41;
             </p>
           </MS.WelcomDiv>
-          <ComBtn type="button" content="로그인 하러 가기" onClick={NextJoin}></ComBtn>
+          <ComBtn type="button" content="로그인 하러 가기" onClick={NextLogin}></ComBtn>
         </>
       )}
     </div>

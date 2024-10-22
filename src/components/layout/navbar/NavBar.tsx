@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import media from "@/styles/media";
-import NavButton from "@/components/common/NavBtn";
+import NavButton from "@/components/common/button/NavBtn";
 import { authAtom } from "@/state/authAtom";
 import { useAtom } from "jotai";
 import useModalHook from "@/hook/UseModalHook";
-import LoginJoinModal from "@/pages/modal/LoginJoinModal";
-
-interface HeaderProps {
-  currentPath: string;
-}
+import LoginJoinModal from "@/components/common/modal/AuthModal";
+import { HeaderProps } from "@/types/type";
 
 export default function NavBar({ currentPath }: HeaderProps) {
   const [isLoggedIn] = useAtom(authAtom);
